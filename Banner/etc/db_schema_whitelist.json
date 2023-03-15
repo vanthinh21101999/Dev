@@ -5,6 +5,7 @@
             "name": true,
             "description": true,
             "img": true,
+            "ffl": true,
             "status": true
         },
         "constraint": {

@@ -12,6 +12,7 @@ use Magento\Backend\Model\Session;
 use Dev\Banner\Model\Post;
 use Dev\Banner\Model\PostFactory;
 use Dev\Banner\Model\ImageUploader;
+use Magento\MediaStorage\Model\File\UploaderFactory;
 class Save extends \Magento\Backend\App\Action
 {
     /**
@@ -27,25 +28,31 @@ class Save extends \Magento\Backend\App\Action
      * @var Session
      */
     protected $adminsession;
+
     /**
-     * @param PostFactory   $postFactory
+     * @param PostFactory $postFactory
      * @param Action\Context $context
-     * @param Post           $uiExamplemodel
-     * @param Session        $adminsession
+     * @param Post $uiExamplemodel
+     * @param Session $adminsession
+     * @param UploaderFactory $uploaderFactory
      */
     public function __construct(
         Action\Context $context,
-        Post $uiExamplemodel,
-        ImageUploader $imageUploaderModel,
-        PostFactory   $postFactory,
-        Session $adminsession
-    ) {
+        Post           $uiExamplemodel,
+        ImageUploader  $imageUploaderModel,
+        PostFactory    $postFactory,
+        UploaderFactory $uploaderFactory,
+        Session        $adminsession
+    )
+    {
         parent::__construct($context);
         $this->postFactory = $postFactory;
         $this->uiExamplemodel = $uiExamplemodel;
         $this->imageUploaderModel = $imageUploaderModel;
         $this->adminsession = $adminsession;
+        $this->uploaderFactory = $uploaderFactory;
     }
+
     /**
      * Save blog record action
      *
@@ -62,7 +69,7 @@ class Save extends \Magento\Backend\App\Action
             }
             $model = $this->postFactory->create();
             $model->setData($data);
-            $model  = $this->imageData($model, $data);
+            $model = $this->imageData($model, $data);
             try {
                 $model->save();
                 $this->messageManager->addSuccess(__('The data has been saved.'));
@@ -90,30 +97,55 @@ class Save extends \Magento\Backend\App\Action
 
     public function imageData($model, $data)
     {
-        if ($model->getId()) {
-            $pageData = $this->postFactory->create();
-            $pageData->load($model->getId());
-            if (isset($data['img'][0]['name'])) {
-                $imageName1 = $pageData->getThumbnail();
-                $imageName2 = $data['img'][0]['name'];
-                if ($imageName1 != $imageName2) {
+        if (isset($data['img']) || isset($data['ffl'])) {
+            if ($model->getId()) {
+                $pageData = $this->postFactory->create();
+                $pageData->load($model->getId());
+                if (isset($data['img'][0]['name'])) {
+                    $imageName1 = $pageData->getThumbnail();
+                    $imageName2 = $data['img'][0]['name'];
+                    if ($imageName1 != $imageName2) {
+                        $imageUrl = $data['img'][0]['url'];
+                        $imageName = $data['img'][0]['name'];
+                        $data['img'] = $this->imageUploaderModel->saveMediaImage($imageName, $imageUrl);
+                    } else {
+                        $data['img'] = $data['img'][0]['name'];
+                    }
+                } else {
+                    $data['img'] = '';
+                }
+            } else {
+                if (isset($data['img'][0]['name'])) {
                     $imageUrl = $data['img'][0]['url'];
                     $imageName = $data['img'][0]['name'];
                     $data['img'] = $this->imageUploaderModel->saveMediaImage($imageName, $imageUrl);
+                }
+            }
+            if ($model->getId()) {
+                $pageData = $this->postFactory->create();
+                $pageData->load($model->getId());
+                if (isset($data['ffl'][0]['name'])) {
+                    $imageName1 = $pageData->getThumbnail();
+                    $imageName2 = $data['ffl'][0]['name'];
+                    if ($imageName1 != $imageName2) {
+                        $imageUrl = $data['ffl'][0]['url'];
+                        $imageName = $data['ffl'][0]['name'];
+                        $data['ffl'] = $this->imageUploaderModel->saveMediaImage($imageName, $imageUrl);
+                    } else {
+                        $data['ffl'] = $data['ffl'][0]['name'];
+                    }
                 } else {
-                    $data['img'] = $data['img'][0]['name'];
+                    $data['ffl'] = '';
                 }
             } else {
-                $data['img'] = '';
+                if (isset($data['ffl'][0]['name'])) {
+                    $imageUrl = $data['ffl'][0]['url'];
+                    $imageName = $data['ffl'][0]['name'];
+                    $data['ffl'] = $this->imageUploaderModel->saveMediaImage($imageName, $imageUrl);
+                }
             }
-        } else {
-            if (isset($data['img'][0]['name'])) {
-                $imageUrl = $data['img'][0]['url'];
-                $imageName = $data['img'][0]['name'];
-                $data['img'] = $this->imageUploaderModel->saveMediaImage($imageName, $imageUrl);
-            }
+            $model->setData($data);
+            return $model;
         }
-        $model->setData($data);
-        return $model;
     }
 }

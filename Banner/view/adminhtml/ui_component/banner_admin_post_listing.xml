@@ -124,15 +124,6 @@
                 </item>
             </argument>
         </column>
-<!--        <column name="img" class="Dev\Banner\Ui\Component\Listing\Columns\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="20">-->
-<!--            <settings>-->
-<!--                <altField>name</altField>-->
-<!--                <hasPreview>1</hasPreview>-->
-<!--                <addField>true</addField>-->
-<!--                <label translate="true">Thumbnail</label>-->
-<!--                <sortable>false</sortable>-->
-<!--            </settings>-->
-<!--        </column>-->
         <column name="status">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -166,14 +157,17 @@
                 <indexField>banner_id</indexField>
             </settings>
         </actionsColumn>
-        <actionsColumn name="actions" class="Dev\Banner\Ui\Component\Listing\Columns\BannerAction" sortOrder="200">
-         <argument name="data" xsi:type="array">
-            <item name="config" xsi:type="array">
-               <item name="resizeEnabled" xsi:type="boolean">false</item>
-               <item name="resizeDefaultWidth" xsi:type="string">107</item>
-               <item name="indexField" xsi:type="string">banner_id</item>
-            </item>
-         </argument>
-      </actionsColumn>
+        <actionsColumn name="ffl" class="Dev\Banner\Ui\Component\Listing\Columns\Download">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">banner_id</item>
+                    <item name="viewUrlPath" xsi:type="string">banner_admin/index/download</item>
+                    <item name="urlEntityParamName" xsi:type="string">id</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Download</label>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>

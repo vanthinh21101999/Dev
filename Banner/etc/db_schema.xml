@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="banner" resource="default" engine="innodb" comment="Banner">
+        <column xsi:type="smallint" name="banner_id" padding="6" unsigned="false" nullable="false" identity="true" comment="Banner ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="25" comment="Name"/>
+        <column xsi:type="varchar" name="description" nullable="false" length="255" comment="Descrition" disabled="true"/>
+        <column xsi:type="varchar" name="img" nullable="false" length="25" comment="Img"/>
+        <column xsi:type="int" name="status" padding="10" nullable="true" comment="Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="banner_id"/>
+        </constraint>
+    </table>
+</schema>

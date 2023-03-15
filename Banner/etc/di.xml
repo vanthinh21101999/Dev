@@ -1,0 +1,70 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="banner_admin_post_listing_data_source" xsi:type="string">
+                    Dev\Banner\Model\ResourceModel\Post\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Dev\Banner\Model\ResourceModel\Post\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">banner</argument>
+            <argument name="resourceModel" xsi:type="string">Dev\Banner\Model\ResourceModel\Post</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="exampleSayHello" xsi:type="object">Dev\Banner\Console\Sayhello</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="change_product" type="Dev\Banner\Plugin\Product" sortOrder="1"/>
+    </type>
+
+
+    <type name="Dev\Banner\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">label/tmp/image</argument>
+            <argument name="basePath" xsi:type="string">label/image</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+                <item name="pdf" xsi:type="string">pdf</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Dev\Banner\Model\PdfUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">label/tmp/image</argument>
+            <argument name="basePath" xsi:type="string">label/image</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="pdf" xsi:type="string">pdf</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
+        <arguments>
+            <argument name="extensions" xsi:type="array">
+                <item name="allowed" xsi:type="array">
+                    <item name="pdf" xsi:type="string">application/pdf</item>
+                </item>
+                <item name="media_allowed" xsi:type="array">
+                    <item name="pdf" xsi:type="string">application/pdf</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

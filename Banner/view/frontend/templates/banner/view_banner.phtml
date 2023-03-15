@@ -1,0 +1,25 @@
+<?php
+/** @var $block \Dev\Banner\Block\Banner\Index */
+$bannerCollection = $block->getCollectionFactory();
+?>
+<div>
+    <p><?= $block->escapeHtml('Data Banner') ?></p>
+    <table style="width: 100%; text-align: center" cellpadding="0" border="1px">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Img</th>
+            <th>Status</th>
+            <th>Short Description</th>
+        </tr>
+        <?php foreach ($bannerCollection as $item): ?>
+            <tr>
+                <td><?= $block->escapeHtml($item->getBannerId()) ?></td>
+                <td><?= $block->escapeHtml($item->getName()) ?></td>
+                <td><?= $block->escapeHtml($item->getImg()) ?></td>
+                <td><?=$block->escapeHtml($item->getStatus()) ?></td>
+                <td><?=$block->escapeHtml($item->getShortDescription()) ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

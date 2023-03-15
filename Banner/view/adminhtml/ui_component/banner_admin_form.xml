@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">banner_admin_form.banner_admin_post_listing_data_source</item>
+            <item name="deps" xsi:type="string">banner_admin_form.banner_admin_post_listing_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Banner Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">banner_admin_form</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Dev\Banner\Block\Adminhtml\Edit\Back</item>
+            <item name="save" xsi:type="string">Dev\Banner\Block\Adminhtml\Edit\Save</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <dataSource name="banner_admin_post_listing_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="banner_admin/form/save"/>
+        </settings>
+        <dataProvider class="Dev\Banner\Model\DataProvider" name="banner_admin_post_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>banner_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="movie_details">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Banner Details</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+            </item>
+        </argument>
+
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">name</item>
+                    <item name="dataScope" xsi:type="string">name</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+<!--        <field name="img">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="dataType" xsi:type="string">string</item>-->
+<!--                    <item name="label" xsi:type="string" translate="true">Image</item>-->
+<!--                    <item name="visible" xsi:type="boolean">true</item>-->
+<!--                    <item name="allowedExtensions" xsi:type="string">jpg jpeg png pdf</item>-->
+<!--                    <item name="maxFileSize" xsi:type="number">12097152</item>-->
+<!--                    <item name="formElement" xsi:type="string">imageUploader</item>-->
+<!--                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>-->
+<!--                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>-->
+<!--                    <item name="dataScope" xsi:type="string">img</item>-->
+<!--                    <item name="uploaderConfig" xsi:type="array">-->
+<!--                        <item name="url" xsi:type="url" path="banner_admin/index/upload">-->
+<!--                            <param name="target_element_id">img</param>-->
+<!--                            <param name="type">image</param>-->
+<!--                        </item>-->
+<!--                    </item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--        </field>-->
+
+        <field name="img">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="source" xsi:type="string">img</item>
+                    <item name="label" xsi:type="string" translate="true">Upload File</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <!-- - Remove fileUploader -->
+                    <!-- + Add imageUploader -->
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="banner_admin/index/upload"/>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">status</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+
+                </item>
+            </argument>
+        </field>
+        <field name="short_description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Short Description</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">short_description</item>
+                    <item name="dataScope" xsi:type="string">short_description</item>
+
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

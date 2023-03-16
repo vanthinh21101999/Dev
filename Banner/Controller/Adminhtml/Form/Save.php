@@ -112,7 +112,7 @@ class Save extends \Magento\Backend\App\Action
                         $data['img'] = $data['img'][0]['name'];
                     }
                 } else {
-                    $data['img'] = '';
+                    $data['img'] = $pageData->getData('img');
                 }
             } else {
                 if (isset($data['img'][0]['name'])) {
@@ -135,7 +135,7 @@ class Save extends \Magento\Backend\App\Action
                         $data['ffl'] = $data['ffl'][0]['name'];
                     }
                 } else {
-                    $data['ffl'] = '';
+                    $data['ffl']= $pageData->getData('ffl');
                 }
             } else {
                 if (isset($data['ffl'][0]['name'])) {

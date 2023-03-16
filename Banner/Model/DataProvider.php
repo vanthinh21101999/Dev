@@ -41,20 +41,13 @@ class DataProvider extends AbstractDataProvider
     {
         $items = $this->collection->getItems();
         foreach ($items as $model) {
-            $this->loadedData[$model->getId()] = $model->getData();
-            if ($model->getImageField()) {
+            $data = $model->getData();
+            if (isset($data['img']) && isset($data['ffl'])) {
+                $this->loadedData[$model->getId()] = $model->getData();
                 $m['img'][0]['name'] = $model->getImageField();
-                $m['img'][0]['url'] = $this->getMediaUrl($model->getImageField());
-                $fullData = $this->loadedData;
-                $this->loadedData[$model->getId()] = array_merge($fullData[$model->getId()], $m);
-            }
-        }
-
-        foreach ($items as $model) {
-            $this->loadedData[$model->getId()] = $model->getData();
-            if ($model->getImageField()) {
+                $m['img'][0]['url'] = $this->getMediaUrl($data['img']);
                 $m['ffl'][0]['name'] = $model->getImageField();
-                $m['ffl'][0]['url'] = $this->getMediaUrl($model->getImageField());
+                $m['ffl'][0]['url'] = $this->getMediaUrl($data['ffl']);
                 $fullData = $this->loadedData;
                 $this->loadedData[$model->getId()] = array_merge($fullData[$model->getId()], $m);
             }

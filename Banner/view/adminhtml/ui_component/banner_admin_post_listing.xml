@@ -166,7 +166,7 @@
                 </item>
             </argument>
             <settings>
-                <label translate="true">Download</label>
+                <label translate="true">Download Pdf</label>
             </settings>
         </actionsColumn>
     </columns>

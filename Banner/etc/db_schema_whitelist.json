@@ -8,6 +8,9 @@
             "ffl": true,
             "status": true
         },
+        "index": {
+            "BANNER_NAME": true
+        },
         "constraint": {
             "PRIMARY": true
         }

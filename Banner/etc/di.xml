@@ -67,4 +67,9 @@
         </arguments>
     </type>
 
+    <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
+        <plugin name="Experius_WysiwygDownloads_Plugin_Magento_Cms_Model_Wysiwyg_Images_Storage" sortOrder="10" type="Dev\Banner\Plugin\Wysiwyg\Images\Storage" />
+    </type>
+
+    <preference for="Magento\Framework\Image\Adapter\Gd2" type="Dev\Banner\Image\Adapter\Gd2" />
 </config>

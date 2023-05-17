@@ -7,7 +7,7 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 class Back extends Generic implements ButtonProviderInterface
 {
     /**
-     * Get button data
+     * Get button data test
      *
      * @return array
      */
